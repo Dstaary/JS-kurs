@@ -1,0 +1,94 @@
+<!-- 
+1. stworzyć plik index.html i strukturę dokumentu
+2. stworzyć przycisk w html
+3. ostylować przycisk i kwadraty, które będę tworzone
+JAVASCRIPT
+1. pobrać przycisk i podpiąć do niego nasłuchiwanie na click
+2. zadeklarować funkcję
+3. w funkcji stworzyć element html (div)
+4. dodać div do strony
+5. stworzyć licznik i uzupełnić zawartość elementu div o wartość licznika
+6. za pomocą instrukcji warunkowej stwierdzić czy dany element jest 5, jeśli tak nadać mu inną klasę 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body button {
+            display: block;
+            margin: 10px auto;
+        }
+
+        div {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            margin: 5px;
+            float: left;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border: 2px solid black;
+        }
+
+        .circle {
+            background-color: white;
+            border-radius: 50%;
+            color: black;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Utwórz element</button>
+    <script>
+        //Pobieramy element z DOM (ze strony internetowej)
+        const btn = document.querySelector("button");
+        //tworzymy zmienną za pomocą zmienne let ponieważ będziemy ją zmiennia. Wartość przechowywana w zmiennej będzie pełniła funkcję licznika
+        let number = 1;
+        // dodatkowy licznik, który ma liczyć do pięciu
+        let activeNumber = 1;
+
+        //tworzymy funkcję i przypisujemy ją do zmienne dzięki czemu mozemy się do niej odwoływać z innych miejsc w programie
+        const addElement = function () {
+            //tworzymy węzeł (element) html i przypisujemy do zmiennej. Istniej on tylko w pamęcim, na tym etapie nie jest dodany do strony
+            const div = document.createElement('div');
+            //do stworzonego element7u html (<div></div>) za pomocą właściwości textContent dodajemy zawartość międzu znaczniki
+            div.textContent = number; //efekt -> <div>1</div>
+            /*
+            dodajemy element do strony dokładnie w miesjce tuż przed znacznikiem "body". "document.body" to skrót do "body", a metoda appendChild dodaje element na końcu obiektu na którym jest wywoływana. Dodawany element jest podawany w argumencie metody
+            */
+            //1 wersja if z modulo
+            // if (number % 5 == 0) {
+            //     div.classList.add("circle")
+            // }
+
+
+            //2 wersja if z dodatkowym licznikiem w nowej zmiennej
+
+            if (activeNumber == 5) {
+                activeNumber = 0;
+                div.classList.add("circle");
+            }
+            document.body.appendChild(div);
+            number++; //inkrementacja
+
+            activeNumber++;
+            // console.log(number);
+
+        }
+
+        //ustwaimy nasłuchiwanie na klik a jako funkcje zwrotną przypisujemy funkcje o nazwie addElement
+        btn.addEventListener("click", addElement)
+    </script>
+
+</body>
+
+</html>
